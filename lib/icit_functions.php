@@ -22,7 +22,7 @@
  * @return array    Collection of information gathered during the run.
  */
 function icit_srdb_replacer( $connection, $search = '', $replace = '', $tables = array( ) ) {
-global $guid, $exclude_cols;
+        global $guid, $exclude_cols, $options;
 
 	$report = array( 'tables' => 0,
 					 'rows' => 0,
@@ -101,12 +101,19 @@ global $guid, $exclude_cols;
 
 					if ( $upd && ! empty( $where_sql ) ) {
 						$sql = 'UPDATE ' . $table . ' SET ' . implode( ', ', $update_sql ) . ' WHERE ' . implode( ' AND ', array_filter( $where_sql ) );
-						$result = mysql_query( $sql, $connection );
-						if ( ! $result )
-							$report[ 'errors' ][] = mysql_error( );
-						else {
+
+                                                if($options['dry-run']) {
                                                         $report[ 'table_updates' ][$table]++;
-							$report[ 'updates' ]++;
+                                                        $report[ 'updates' ]++;
+                                                }
+                                                else {
+                                                        $result = mysql_query( $sql, $connection );
+                                                        if ( ! $result )
+                                                                $report[ 'errors' ][] = mysql_error( );
+                                                        else {
+                                                                $report[ 'table_updates' ][$table]++;
+                                                                $report[ 'updates' ]++;
+                                                        }
                                                 }
 
 					} elseif ( $upd ) {

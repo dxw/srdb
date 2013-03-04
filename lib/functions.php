@@ -8,6 +8,7 @@ function parse_arguments(&$argv) {
     "u"      => "root",
     "d"      => "wordpress",
     "tables" => "",
+    "dry-run"=> false,
   );
 
 
@@ -19,6 +20,7 @@ function parse_arguments(&$argv) {
   $optparser->addRule('d::');
   $optparser->addRule('u::');
   $optparser->addRule('tables::');
+  $optparser->addRule('dry-run');
   $optparser->addRule('help');
 
   try{
@@ -72,6 +74,7 @@ Options:
   -u <username>      MySQL account name (Default: root)
   -d <database>      MySQL database (Default: wordpress)
   --tables <tables>  Comma-separated list of tables to search within (Default: all tables)
+  --dry-run          Don't modify the database
 
 <?php
 

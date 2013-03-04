@@ -45,7 +45,17 @@ else {
 // Do the thing
 //
 
-echo 'Replacing "' . $argv[0] . '" with "' . $argv[1] . "\" in " . count($tables) . " tables.\nWorking...";
+if($options['dry-run']) {
+  echo "[Dry run] ";
+}
+
+echo 'Replacing "' . $argv[0] . '" with "' . $argv[1] . "\" in " . count($tables) . " tables.\n";
+
+if($options['dry-run']) {
+  echo "[Dry run] ";
+}
+
+echo "Working...";
 
 $report = icit_srdb_replacer($connection, $argv[0], $argv[1], $tables);
 
@@ -67,6 +77,10 @@ else {
   }
 
   echo "\n";
+}
+
+if($options['dry-run']) {
+  echo "[Dry run] ";
 }
 
 echo "Finished (" . round($time, 2) . "s)\n";
