@@ -1,0 +1,67 @@
+#!/usr/bin/php
+<?php
+
+require dirname(__FILE__) . '/lib/optionparser/lib/OptionParser.php';
+require dirname(__FILE__) . '/lib/functions.php';
+require dirname(__FILE__) . '/lib/icit_functions.php';
+
+
+//
+// Parse and validate arguments
+//
+
+// If the user specified invalid options, this will not return
+$options = parse_arguments($argv);
+
+// Emit help, if required, and then exit
+if(isset($options['help'])) {
+  usage();
+}
+
+
+//
+// Connect to the database and figure out the tables
+//
+
+$connection = mysql_connect($options['h'], $options['u'], $options['p']);
+mysql_select_db($options['d']);
+
+$tables = $options['tables'];
+
+if(!$tables) {
+  $tables = array();
+
+  $result = mysql_query("show tables");
+  while($row = mysql_fetch_array($result)) {
+    $tables[] = array_pop($row);
+  }
+}
+else {
+  $tables = explode(',', $options['tables']);
+}
+
+
+//
+// Do the thing
+//
+
+echo 'Replacing "' . $argv[0] . '" with "' . $argv[1] . "\" in " . count($tables) . " tables: \n      " . implode("\n      ", $tables) . "\n\n";
+
+$report = icit_srdb_replacer($connection, $argv[0], $argv[1], $tables);
+
+// Calc the time taken.
+$time = array_sum( explode( ' ', $report[ 'end' ] ) ) - array_sum( explode( ' ', $report[ 'start' ] ) );
+
+echo "Processed {$report['rows']} rows and made {$report['updates']} updates in " . round($time, 2) . "s on tables:\n\n";
+
+foreach($report['table_updates'] as $table => $updates) {
+  if($updates == 0) {
+    continue;
+  }
+
+  printf("%5u %s\n", $updates, $table);
+}
+
+echo "\n";
+
+exit(0);
