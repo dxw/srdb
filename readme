@@ -1,9 +1,6 @@
-SRDB is a command-line tool for searching and replacing values within a database, designed
-not to damage serialised objects. It is intended for use when migrating WordPress databases
-but is suitable for any similar problem.
+SRDB is a command-line tool for searching and replacing values within a database, designed not to damage serialised objects. It is intended for use when migrating WordPress databases but is suitable for any similar problem.
 
-This command-line tool is almost entirely based on interconnect/it's excellent search & replace
-tool:
+This command-line tool is almost entirely based on interconnect/it's excellent search & replace tool:
 
   http://interconnectit.com/products/search-and-replace-for-wordpress-databases/
 
