@@ -4,7 +4,7 @@ This command-line tool is almost entirely based on interconnect/it's excellent s
 
   http://interconnectit.com/products/search-and-replace-for-wordpress-databases/
 
-  We just wanted something to run on the command-line, so we modified it.
+We just wanted something to run on the command-line, so we modified it.
 
 Usage: 
   srdb [options] <search> <replace>
