@@ -6,6 +6,16 @@ This command-line tool is almost entirely based on interconnect/it's excellent s
 
 We just wanted something to run on the command-line, so we modified it.
 
+Installation:
+
+  Clone the repository at:
+
+    https://github.com/dxw/srdb
+
+  and run:
+
+    > git submodule update --init
+
 Usage: 
   srdb [options] <search> <replace>
 
@@ -18,7 +28,7 @@ Options:
 
   -h <host>       MySQL server hostname. (Default: localhost)
   -p <password>           MySQL user's password
-  -u <password>           MySQL account name (Default: root)
-  -d <password>           MySQL database (Default: wordpress)
+  -u <username>           MySQL account name (Default: root)
+  -d <database>           MySQL database (Default: wordpress)
   --tables <tables>       Comma-separated list of tables to search within (Default: all tables)
 
