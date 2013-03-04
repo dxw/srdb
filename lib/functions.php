@@ -62,16 +62,16 @@ Usage:
 
 Arguments:
 
-  search	          String to look for
-  replace	          String to replace matches with
+  search	     String to look for
+  replace	     String to replace matches with
 
 Options:
 
-  -h <host> 	 	  MySQL server hostname. (Default: localhost)
-  -p <password>           MySQL user's password
-  -u <username>           MySQL account name (Default: root)
-  -d <database>           MySQL database (Default: wordpress)
-  --tables <tables>       Comma-separated list of tables to search within (Default: all tables)
+  -h <host> 	     MySQL server hostname. (Default: localhost)
+  -p <password>      MySQL user's password
+  -u <username>      MySQL account name (Default: root)
+  -d <database>      MySQL database (Default: wordpress)
+  --tables <tables>  Comma-separated list of tables to search within (Default: all tables)
 
 <?php
 
