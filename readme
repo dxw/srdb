@@ -14,7 +14,7 @@ Installation:
 
   and run:
 
-    > git submodule update --init
+    $ git submodule update --init
 
 Usage: 
   srdb [options] <search> <replace>
