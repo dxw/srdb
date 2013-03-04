@@ -45,23 +45,30 @@ else {
 // Do the thing
 //
 
-echo 'Replacing "' . $argv[0] . '" with "' . $argv[1] . "\" in " . count($tables) . " tables: \n      " . implode("\n      ", $tables) . "\n\n";
+echo 'Replacing "' . $argv[0] . '" with "' . $argv[1] . "\" in " . count($tables) . " tables.\nWorking...";
 
 $report = icit_srdb_replacer($connection, $argv[0], $argv[1], $tables);
 
 // Calc the time taken.
 $time = array_sum( explode( ' ', $report[ 'end' ] ) ) - array_sum( explode( ' ', $report[ 'start' ] ) );
 
-echo "Processed {$report['rows']} rows and made {$report['updates']} updates in " . round($time, 2) . "s on tables:\n\n";
+if(!$report['updates']) {
+  echo " looked in {$report['rows']} rows but made no changes!\n\n";
+}
+else {
+  echo " processed {$report['rows']} rows and made {$report['updates']} updates:\n\n";
 
-foreach($report['table_updates'] as $table => $updates) {
-  if($updates == 0) {
-    continue;
+  foreach($report['table_updates'] as $table => $updates) {
+    if($updates == 0) {
+      continue;
+    }
+
+    printf("%5u %s\n", $updates, $table);
   }
 
-  printf("%5u %s\n", $updates, $table);
+  echo "\n";
 }
 
-echo "\n";
+echo "Finished (" . round($time, 2) . "s)\n";
 
 exit(0);

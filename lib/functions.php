@@ -3,11 +3,11 @@
 function parse_arguments(&$argv) {
   // Default options
   $defaults = array(
-    'h'        => 'localhost',
-    'p'    => '',
-    "u"        => "root",
-    "d"    => "wordpress",
-    "tables"      => "",
+    'h'      => 'localhost',
+    'p'      => '',
+    "u"      => "root",
+    "d"      => "wordpress",
+    "tables" => "",
   );
 
 
@@ -69,8 +69,8 @@ Options:
 
   -h <host> 	 	  MySQL server hostname. (Default: localhost)
   -p <password>           MySQL user's password
-  -u <password>           MySQL account name (Default: root)
-  -d <password>           MySQL database (Default: wordpress)
+  -u <username>           MySQL account name (Default: root)
+  -d <database>           MySQL database (Default: wordpress)
   --tables <tables>       Comma-separated list of tables to search within (Default: all tables)
 
 <?php
