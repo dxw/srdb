@@ -9,6 +9,7 @@ function parse_arguments(&$argv) {
     "d"      => "wordpress",
     "tables" => "",
     "dry-run"=> false,
+    "o"      => false, 
   );
 
 
@@ -19,6 +20,7 @@ function parse_arguments(&$argv) {
   $optparser->addRule('p::');
   $optparser->addRule('d::');
   $optparser->addRule('u::');
+  $optparser->addRule('o::');
   $optparser->addRule('tables::');
   $optparser->addRule('dry-run');
   $optparser->addRule('help');
@@ -73,6 +75,7 @@ Options:
   -p <password>      MySQL user's password
   -u <username>      MySQL account name (Default: root)
   -d <database>      MySQL database (Default: wordpress)
+  -o <file>          Output each executed SQL query to <file>
   --tables <tables>  Comma-separated list of tables to search within (Default: all tables)
   --dry-run          Don't modify the database
 

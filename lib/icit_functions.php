@@ -102,6 +102,10 @@ function icit_srdb_replacer( $connection, $search = '', $replace = '', $tables =
 					if ( $upd && ! empty( $where_sql ) ) {
 						$sql = 'UPDATE ' . $table . ' SET ' . implode( ', ', $update_sql ) . ' WHERE ' . implode( ' AND ', array_filter( $where_sql ) );
 
+                                                if($options['o'] !== false) {
+                                                  file_put_contents($options['o'], $sql . "\n", FILE_APPEND);
+                                                }
+
                                                 if($options['dry-run']) {
                                                         $report[ 'table_updates' ][$table]++;
                                                         $report[ 'updates' ]++;
