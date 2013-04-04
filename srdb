@@ -79,6 +79,14 @@ else {
   echo "\n";
 }
 
+if($report['errors']) {
+  echo "The following problems were reported:\n\n";
+
+  foreach($report['errors'] as $error) {
+    echo "  {$error}\n";
+  }
+}
+
 if($options['dry-run']) {
   echo "[Dry run] ";
 }

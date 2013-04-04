@@ -6,7 +6,6 @@
   *   https://github.com/interconnectit/Search-Replace-DB
   */
 
-
 /**
  * The main loop triggered in step 5. Up here to keep it out of the way of the
  * HTML. This walks every table in the db that was selected in step 3 and then
@@ -84,6 +83,11 @@ function icit_srdb_replacer( $connection, $search = '', $replace = '', $tables =
 							continue;
 
 						$edited_data = $data_to_fix = $row[ $column ];
+
+                                                if(!mb_check_encoding($data_to_fix, 'UTF-8')) {
+                                                  $report[ 'errors' ][] = sprintf( '%s contains invalid UTF-8 characters, manual change needed on row %s.', $table, $current_row );
+                                                  continue;
+                                                }
 
 						// Run a search replace on the data that'll respect the serialisation.
 						$edited_data = recursive_unserialize_replace( $search, $replace, $data_to_fix );
