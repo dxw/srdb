@@ -84,8 +84,13 @@ function icit_srdb_replacer( $connection, $search = '', $replace = '', $tables =
 
 						$edited_data = $data_to_fix = $row[ $column ];
 
-                                                if(!mb_check_encoding($data_to_fix, 'UTF-8')) {
-                                                  $report[ 'errors' ][] = sprintf( '%s contains invalid UTF-8 characters, manual change needed on row %s.', $table, $current_row );
+                                                // Get encoding
+                                                $encoding_query = "SELECT character_set_name FROM information_schema.`COLUMNS` C WHERE table_schema = '{$options['d']}' AND table_name = '{$table}' and column_name='{$column}'";
+                                                $encoding_result = mysql_query($encoding_query);
+                                                $encoding = mysql_result($encoding_result, 0);
+
+                                                if(!empty($encoding) && !mb_check_encoding($data_to_fix, $encoding) && !$options['ignore-bad-chars']) {
+                                                  $report[ 'errors' ][] = sprintf( '%s contains invalid ' . $encoding . ' characters at row %s (skipped).', $table, $current_row );
                                                   continue;
                                                 }
 

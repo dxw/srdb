@@ -10,6 +10,7 @@ function parse_arguments(&$argv) {
     "tables" => "",
     "dry-run"=> false,
     "o"      => false, 
+    "ignore-bad-chars"=> false,
   );
 
 
@@ -23,6 +24,7 @@ function parse_arguments(&$argv) {
   $optparser->addRule('o::');
   $optparser->addRule('tables::');
   $optparser->addRule('dry-run');
+  $optparser->addRule('ignore-bad-chars');
   $optparser->addRule('help');
 
   try{
@@ -78,6 +80,9 @@ Options:
   -o <file>          Output each executed SQL query to <file>
   --tables <tables>  Comma-separated list of tables to search within (Default: all tables)
   --dry-run          Don't modify the database
+  --ignore-bad-chars If this flag is set, srdb will ignore bad characters and do the 
+                     replace anyway. If you use it, it is possible that these replaces will
+                     break your database. Be careful.
 
 <?php
 

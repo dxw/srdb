@@ -51,9 +51,19 @@ if($options['dry-run']) {
 
 echo 'Replacing "' . $argv[0] . '" with "' . $argv[1] . "\" in " . count($tables) . " tables.\n";
 
+if($options['ignore-bad-chars']) {
+  if($options['dry-run']) {
+    echo "[Dry run] ";
+  }
+
+  echo "WARNING: srdb is ignoring bad character encoding! You might lose data.\n";
+}
+
 if($options['dry-run']) {
   echo "[Dry run] ";
 }
+
+
 
 echo "Working...";
 
