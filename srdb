@@ -24,6 +24,12 @@ if(isset($options['help'])) {
 //
 
 $connection = mysql_connect($options['h'], $options['u'], $options['p']);
+
+if(!$connection) {
+  echo "Failed to connect to the database: " . mysql_error();
+  exit 1;
+}
+
 mysql_select_db($options['d']);
 
 $tables = $options['tables'];
