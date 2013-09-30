@@ -84,6 +84,10 @@ function icit_srdb_replacer( $connection, $search = '', $replace = '', $tables =
 
 						$edited_data = $data_to_fix = $row[ $column ];
 
+                                                if (!is_string($data_to_fix)) {
+                                                  continue;
+                                                }
+
                                                 // Get encoding
                                                 $encoding_query = "SELECT character_set_name FROM information_schema.`COLUMNS` C WHERE table_schema = '{$options['d']}' AND table_name = '{$table}' and column_name='{$column}'";
                                                 $encoding_result = mysql_query($encoding_query);
